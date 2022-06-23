@@ -1,5 +1,7 @@
 import os
 import re
+import datetime
+import time
 
 BALDURS_GATE_BASE_SAVE_FOLDER = "~\\Documents\\Baldur's Gate - Enhanced Edition\\save\\"
 
@@ -14,10 +16,19 @@ def does_folder_name_match(folder_name):
 
 
 
-def get_age_folder(full_path, folder_name):
-    folder_full_path = os.path.join(full_path, folder_name)
-    print(folder_full_path)
-    pass
+def get_age_folder(folder_full_path):
+    folder_stats = os.stat(folder_full_path)
+
+    seconds = time.time()
+    modified = folder_stats.st_mtime
+
+    delta = seconds - modified
+
+    return delta
+
+    print(folder_full_path,"modified = {}".format(datetime.datetime.fromtimestamp(modified)), delta)
+
+
 
 
 
@@ -58,7 +69,7 @@ def find_quick_save(os_entries):
         files_match = does_folder_contain_sub_files(full_path, files)
 
         if files_match and folder_match:
-            folder_age = get_age_folder(full_path, folder_name)
+            folder_age = get_age_folder(full_path)
             print(folder_name,folder_match,files_match, folder_age)
 
 
