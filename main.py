@@ -10,8 +10,8 @@ base_save_path = os.path.expanduser(BALDURS_GATE_BASE_SAVE_FOLDER)
 
 
 
-def does_folder_name_match(folder_name):
-    s = re.search("000000001-Quick-Save", folder_name)
+def does_folder_name_match_quick_save(folder_name):
+    s = re.search(r"000000001-Quick-Save", folder_name)
     return bool(s)
 
 
@@ -52,15 +52,19 @@ def does_folder_contain_sub_files(folder_full_path, files):
     return True
 
 
+def get_folder_base_name(full_path):
+    return os.path.basename(os.path.normpath(full_path))      
+
+
 
 def find_quick_save(os_entries):
     for entry in os_entries:
         full_path = entry[0]
         files = entry[2]
 
-        folder_name = os.path.basename(os.path.normpath(full_path))      
+        folder_name = get_folder_base_name(full_path)
 
-        folder_match = does_folder_name_match(folder_name)
+        folder_match = does_folder_name_match_quick_save(folder_name)
 
         files_match = does_folder_contain_sub_files(full_path, files)
 
@@ -73,6 +77,26 @@ def find_quick_save(os_entries):
 
 
 
+def folder_is_save(folder_name):
+    s = re.search(r"^\d{9}\-", folder_name)  
+    return bool(s)
+
+
+def find_next_available_save_folder_name(os_entries):
+
+
+    for entry in os_entries:
+        full_path = entry[0]
+
+        folder_name = get_folder_base_name(full_path)
+
+        is_save = folder_is_save(folder_name)
+
+        if is_save:
+            print(is_save, folder_name)
+        else:
+            print(is_save, folder_name, "!"*100)
+
 
 
 
@@ -83,5 +107,9 @@ def loop():
     safe_quick_save = find_quick_save(list_folders)
 
     print(safe_quick_save)
+
+    print("-"*80)
+
+    find_next_available_save_folder_name(list_folders)
 
 loop()
