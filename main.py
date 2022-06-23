@@ -133,7 +133,7 @@ def rename_save(safe_quick_save, next_save_slot):
 
 def loop():
 
-    time.sleep(8)
+    time.sleep(1)
 
     list_folders = os.walk(base_save_path)
 
