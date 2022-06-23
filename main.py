@@ -116,8 +116,11 @@ def get_folder_name_from_index(index):
 
 
 def rename_save(safe_quick_save, next_save_slot):
-    print(safe_quick_save,"🔜",next_save_slot)
-    pass
+    full_next_save_slot = os.path.join(base_save_path, next_save_slot)
+
+    print(safe_quick_save,"🔜",full_next_save_slot)
+
+    # os.rename(safe_quick_save,full_next_save_slot) 
 
 
 
