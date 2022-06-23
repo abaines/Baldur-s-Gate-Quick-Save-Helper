@@ -120,7 +120,10 @@ def rename_save(safe_quick_save, next_save_slot):
 
     print(safe_quick_save,"🔜",full_next_save_slot)
 
-    # os.rename(safe_quick_save,full_next_save_slot) 
+    os.rename(safe_quick_save,full_next_save_slot) 
+
+    print( "       ✅       " * 3) 
+
 
 
 
