@@ -74,10 +74,11 @@ def find_quick_save(os_entries):
         if files_match and folder_match:
             folder_age = get_age_folder(full_path)
 
-            happy_age = folder_age > 2 and folder_age < 60*60*8
+            happy_age = folder_age > 2  
 
             if happy_age:
-                return full_path
+                return full_path, folder_age
+    return None, None
 
 
 
@@ -142,12 +143,12 @@ def loop():
 
     list_folders = os.walk(base_save_path)
 
-    safe_quick_save = find_quick_save(list_folders)
+    safe_quick_save, folder_age = find_quick_save(list_folders)
 
     if safe_quick_save:
         beep_a() 
 
-        print("💾 ",safe_quick_save)
+        print("💾 ",safe_quick_save, folder_age)
 
         print("-"*80)
 
