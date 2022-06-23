@@ -77,9 +77,12 @@ def find_quick_save(os_entries):
 
 
 
-def folder_is_save(folder_name):
-    s = re.search(r"^\d{9}\-", folder_name)  
-    return bool(s)
+def get_save_folder_index(folder_name):
+    s = re.match(r"^(\d{9})\-", folder_name)
+    if s:
+        text = s.groups()[0]
+        return int( text ) 
+
 
 
 def find_next_available_save_folder_name(os_entries):
@@ -90,12 +93,12 @@ def find_next_available_save_folder_name(os_entries):
 
         folder_name = get_folder_base_name(full_path)
 
-        is_save = folder_is_save(folder_name)
+        is_save = get_save_folder_index(folder_name)
 
         if is_save:
-            print(is_save, folder_name)
+            print(folder_name, is_save)
         else:
-            print(is_save, folder_name, "!"*100)
+            print(folder_name, "!"*100, is_save)
 
 
 
