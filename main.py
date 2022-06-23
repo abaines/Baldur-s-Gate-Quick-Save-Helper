@@ -2,6 +2,9 @@ import os
 import re
 import datetime
 import time
+import winsound
+
+
 
 BALDURS_GATE_BASE_SAVE_FOLDER = "~\\Documents\\Baldur's Gate - Enhanced Edition\\save\\"
 
@@ -130,28 +133,39 @@ def rename_save(safe_quick_save, next_save_slot):
 
 def loop():
 
+    time.sleep(8)
+
     list_folders = os.walk(base_save_path)
 
     safe_quick_save = find_quick_save(list_folders)
 
-    print("💾 ",safe_quick_save)
+    if safe_quick_save:
+        winsound.Beep(440, 50) 
 
-    print("-"*80)
+        print("💾 ",safe_quick_save)
 
-    next_index = find_next_available_save_folder_name(list_folders)
+        print("-"*80)
 
-    next_save_slot = get_folder_name_from_index(next_index)
+        next_index = find_next_available_save_folder_name(list_folders)
 
-    print("⏭ ",next_save_slot)
+        next_save_slot = get_folder_name_from_index(next_index)
 
-    rename_save(safe_quick_save,next_save_slot)
+        print("⏭ ",next_save_slot)
+
+        rename_save(safe_quick_save,next_save_slot)
+
+        winsound.Beep(750, 50)
+        time.sleep(6)
 
 
 
+winsound.Beep(440, 50) 
+winsound.Beep(750, 50)
 print( "       🏃‍       " * 3) 
 
 
-loop()
+while(1<3):
+    loop() 
 
 
 print( "       🛑       " * 3) 
