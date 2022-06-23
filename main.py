@@ -26,10 +26,6 @@ def get_age_folder(folder_full_path):
 
     return delta
 
-    print(folder_full_path,"modified = {}".format(datetime.datetime.fromtimestamp(modified)), delta)
-
-
-
 
 
 def does_folder_contain_sub_files(folder_full_path, files):
@@ -70,7 +66,8 @@ def find_quick_save(os_entries):
 
         if files_match and folder_match:
             folder_age = get_age_folder(full_path)
-            print(folder_name,folder_match,files_match, folder_age)
+            happy_age = folder_age > 2 and folder_age < 60*60
+            print(folder_name,folder_match,files_match, folder_age, happy_age)
 
 
 
