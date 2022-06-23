@@ -87,18 +87,29 @@ def get_save_folder_index(folder_name):
 
 def find_next_available_save_folder_name(os_entries):
 
+    max_index_found = -1
 
     for entry in os_entries:
         full_path = entry[0]
 
         folder_name = get_folder_base_name(full_path)
 
-        is_save = get_save_folder_index(folder_name)
+        save_index = get_save_folder_index(folder_name)
 
-        if is_save:
-            print(folder_name, is_save)
-        else:
-            print(folder_name, "!"*100, is_save)
+        
+        if save_index:
+            max_index_found = max(max_index_found,save_index)
+
+    return max_index_found + 1
+
+
+def get_folder_name_from_index(index):
+    text = str(index)
+
+    iso = datetime.datetime.now().replace(microsecond=0).isoformat()
+
+    return "{}-Python-{}".format(text.zfill(9),iso)
+
 
 
 
@@ -113,6 +124,8 @@ def loop():
 
     print("-"*80)
 
-    find_next_available_save_folder_name(list_folders)
+    next_index = find_next_available_save_folder_name(list_folders)
+
+    print(get_folder_name_from_index(next_index))
 
 loop()
