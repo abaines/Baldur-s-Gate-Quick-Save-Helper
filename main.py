@@ -130,6 +130,11 @@ def rename_save(safe_quick_save, next_save_slot):
 
 
 
+def beep_a():
+    winsound.Beep(340, 30) 
+
+def beep_b():
+    winsound.Beep(450, 30)
 
 def loop():
 
@@ -140,7 +145,7 @@ def loop():
     safe_quick_save = find_quick_save(list_folders)
 
     if safe_quick_save:
-        winsound.Beep(440, 50) 
+        beep_a() 
 
         print("💾 ",safe_quick_save)
 
@@ -154,13 +159,13 @@ def loop():
 
         rename_save(safe_quick_save,next_save_slot)
 
-        winsound.Beep(750, 50)
+        beep_b()
         time.sleep(6)
 
 
 
-winsound.Beep(440, 50) 
-winsound.Beep(750, 50)
+beep_a()
+beep_b()
 print( "       🏃‍       " * 3) 
 
 
