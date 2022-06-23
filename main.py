@@ -104,11 +104,13 @@ def find_next_available_save_folder_name(os_entries):
 
 
 def get_folder_name_from_index(index):
-    text = str(index)
+    text = str(index).zfill(9)
 
     iso = datetime.datetime.now().replace(microsecond=0).isoformat()
 
-    return "{}-Python-{}".format(text.zfill(9),iso)
+    stamp = re.sub(":","-",iso) 
+
+    return "{}-Python-{}".format(text,stamp)
 
 
 
