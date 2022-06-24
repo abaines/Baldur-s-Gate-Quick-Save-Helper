@@ -148,7 +148,7 @@ def loop():
     if safe_quick_save:
         beep_a() 
 
-        print("💾 ",safe_quick_save, folder_age)
+        print("💾 ",safe_quick_save, "🧓", folder_age)
 
         print("-"*80)
 
